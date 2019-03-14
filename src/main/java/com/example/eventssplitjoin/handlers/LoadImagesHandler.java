@@ -2,7 +2,6 @@ package com.example.eventssplitjoin.handlers;
 
 import com.example.eventssplitjoin.commands.LoadImages;
 import com.example.eventssplitjoin.domain.Maneuver;
-import com.example.eventssplitjoin.domain.Project;
 import com.example.eventssplitjoin.events.IncompleteImageDiscovered;
 import com.example.eventssplitjoin.events.IncompleteLeadDiscovered;
 import com.example.eventssplitjoin.events.IncompleteManeuverDiscovered;
@@ -72,11 +71,14 @@ class LoadImagesHandler {
         public LoadImagesHandler.Lead next() {
             List<Maneuver> leadManeuvers = new LinkedList<>();
 
-            if (this.maneuvers.peek() == null)
+            final Maneuver firstManeuverOfLead = this.maneuvers.peek();
+            if (firstManeuverOfLead == null) {
+                // end of iterator
                 return null;
+            }
 
-            String leadId = this.maneuvers.peek().getLeadstoreId();
-            String projectId = this.maneuvers.peek().getProjectId();
+            String leadId = firstManeuverOfLead.getLeadstoreId();
+            String projectId = firstManeuverOfLead.getProjectId();
 
             do {
                 leadManeuvers.add(this.maneuvers.poll());
