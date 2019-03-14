@@ -29,10 +29,3 @@ public class Runner implements CommandLineRunner {
     }
 }
 
-@Component
-class EventLogger {
-    @Subscribe
-    public void handle(Event e) {
-        System.out.println(e.getClass().getSimpleName());
-    }
-}
