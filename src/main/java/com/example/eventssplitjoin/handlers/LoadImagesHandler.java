@@ -56,10 +56,6 @@ class LoadImagesHandler {
         return StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.toList());
     }
 
-    private Project createProject(String name) {
-        return new Project("project-1", name);
-    }
-
     private static class ManeuversIterator implements Iterator<LoadImagesHandler.Lead> {
         private final Queue<Maneuver> maneuvers;
 
