@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 class EventLogger {
     @Subscribe
     public void handle(Event e) {
-        System.out.println(e.getClass().getSimpleName());
+        System.out.println(e.getClass().getSimpleName() + " - "+ e.toString());
     }
 }

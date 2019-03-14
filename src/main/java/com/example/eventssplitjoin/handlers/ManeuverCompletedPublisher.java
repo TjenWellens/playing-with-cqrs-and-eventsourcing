@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 @Component
@@ -21,7 +22,7 @@ class ManeuverCompletedPublisher {
 
     @Subscribe
     public void handle(IncompleteManeuverDiscovered e) {
-        maneuverId_imageTypes.put(e.getManeuverId(), e.getIncompleteImages());
+        maneuverId_imageTypes.put(e.getManeuverId(), new HashSet<>(e.getIncompleteImages()));
     }
 
     @Subscribe
