@@ -10,4 +10,5 @@ import lombok.ToString;
 public class Maneuver {
     private final String id;
     private final String leadstoreId;
+    private final String projectId;
 }

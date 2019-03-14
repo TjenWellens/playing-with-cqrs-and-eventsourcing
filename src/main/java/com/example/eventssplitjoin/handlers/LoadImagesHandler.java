@@ -3,10 +3,10 @@ package com.example.eventssplitjoin.handlers;
 import com.example.eventssplitjoin.commands.LoadImages;
 import com.example.eventssplitjoin.domain.Maneuver;
 import com.example.eventssplitjoin.domain.Project;
-import com.example.eventssplitjoin.events.Event;
 import com.example.eventssplitjoin.events.IncompleteImageDiscovered;
 import com.example.eventssplitjoin.events.IncompleteLeadDiscovered;
 import com.example.eventssplitjoin.events.IncompleteManeuverDiscovered;
+import com.example.eventssplitjoin.events.IncompleteProjectDiscovered;
 import com.example.eventssplitjoin.repo.ManeuverRepo;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
@@ -28,26 +28,32 @@ class LoadImagesHandler {
     public void handle(LoadImages e) {
         // create events: IncompleteLeadDiscovered, IncompleteManeuverDiscovered, IncompleteImageDiscovered
 
+
         final List<Maneuver> maneuvers = maneuverRepo.findManeuversThatAreIncomplete(e.getProjectName());
-        Iterable<LoadImagesHandler.Lead> iterable = () -> new LoadImagesHandler.ManeuversIterator(maneuvers);
-        StreamSupport.stream(iterable.spliterator(), false)
+        final List<Lead> leads = maneuversToLeads(maneuvers);
+
+        if (!leads.isEmpty()) {
+            bus.post(new IncompleteProjectDiscovered(e.getProjectName(), leads.stream().map(Lead::getLeadstoreId).collect(Collectors.toSet())));
+        }
+        leads.stream()
                 .flatMap(lead -> {
-                    Collection<Event> events = new LinkedList<>();
-
                     final Set<String> maneuverIds = lead.getManeuvers().stream().map(Maneuver::getId).collect(Collectors.toSet());
-                    events.add(new IncompleteLeadDiscovered(lead.getLeadstoreId(), maneuverIds));
+                    bus.post(new IncompleteLeadDiscovered(lead.getLeadstoreId(), maneuverIds));
 
-                    lead.getManeuvers().forEach(maneuver -> {
-                        events.add(new IncompleteManeuverDiscovered(maneuver.getId(), e.getImageTypes()));
-
-                        e.getImageTypes().forEach(imageType -> {
-                            events.add(new IncompleteImageDiscovered(lead.getLeadstoreId(), maneuver.getId(), imageType));
-                        });
-                    });
-
-                    return events.stream();
+                    return lead.getManeuvers().stream();
                 })
-                .forEach(bus::post);
+                .forEach(maneuver -> {
+                    bus.post(new IncompleteManeuverDiscovered(maneuver.getId(), e.getImageTypes()));
+
+                    e.getImageTypes().forEach(imageType -> {
+                        bus.post(new IncompleteImageDiscovered(maneuver.getProjectId(), maneuver.getLeadstoreId(), maneuver.getId(), imageType));
+                    });
+                });
+    }
+
+    private List<Lead> maneuversToLeads(List<Maneuver> maneuvers) {
+        Iterable<Lead> iterable = () -> new ManeuversIterator(maneuvers);
+        return StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.toList());
     }
 
     private Project createProject(String name) {
@@ -74,18 +80,20 @@ class LoadImagesHandler {
                 return null;
 
             String leadId = this.maneuvers.peek().getLeadstoreId();
+            String projectId = this.maneuvers.peek().getProjectId();
 
             do {
                 leadManeuvers.add(this.maneuvers.poll());
             } while (this.maneuvers.peek() != null && leadId.equals(this.maneuvers.peek().getLeadstoreId()));
 
-            return new LoadImagesHandler.Lead(leadId, leadManeuvers);
+            return new LoadImagesHandler.Lead(projectId, leadId, leadManeuvers);
         }
     }
 
     @Getter
     @RequiredArgsConstructor
     private static class Lead {
+        private final String projectId;
         private final String leadstoreId;
         private final List<Maneuver> maneuvers;
     }

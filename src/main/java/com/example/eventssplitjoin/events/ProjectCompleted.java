@@ -5,9 +5,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 @Getter
-@RequiredArgsConstructor
 @ToString
-public class LeadCompleted implements Event {
-    private final String leadId;
+@RequiredArgsConstructor
+public class ProjectCompleted implements Event {
     private final String projectId;
 }

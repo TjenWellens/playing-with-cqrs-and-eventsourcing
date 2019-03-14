@@ -32,7 +32,7 @@ class LeadCompletedPublisher {
             throw new IllegalStateException("No maneuver to remove: " + e);
 
         if (incompletedManeuverIds.isEmpty()) {
-            bus.post(new LeadCompleted(e.getLeadId()));
+            bus.post(new LeadCompleted(e.getLeadId(), e.getProjectId()));
         }
     }
 }

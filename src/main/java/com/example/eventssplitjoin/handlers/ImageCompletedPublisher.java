@@ -21,6 +21,6 @@ class ImageCompletedPublisher {
     @Subscribe
     public void handle(IncompleteImageDiscovered e) {
         // todo: fetch image, store image, store url
-        bus.post(new ImageCompleted(e.getLeadId(), e.getManeuverId(), e.getImageType()));
+        bus.post(new ImageCompleted(e.getProjectId(), e.getLeadId(), e.getManeuverId(), e.getImageType()));
     }
 }

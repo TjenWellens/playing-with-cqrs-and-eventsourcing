@@ -8,6 +8,7 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @ToString
 public class ManeuverCompleted implements Event {
+    private final String projectId;
     private final String leadId;
     private final String maneuverId;
 }

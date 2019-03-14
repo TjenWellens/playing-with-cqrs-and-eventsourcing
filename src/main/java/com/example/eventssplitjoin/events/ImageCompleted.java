@@ -9,6 +9,7 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @ToString
 public class ImageCompleted implements Event {
+    private final String projectId;
     private final String leadId;
     private final String maneuverId;
     private final ImageType imageType;

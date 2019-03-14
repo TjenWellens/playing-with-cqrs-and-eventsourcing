@@ -34,7 +34,7 @@ class ManeuverCompletedPublisher {
             throw new IllegalStateException("No maneuver to remove: " + e);
 
         if (incompletedImageTypes.isEmpty()) {
-            bus.post(new ManeuverCompleted(e.getLeadId(), e.getManeuverId()));
+            bus.post(new ManeuverCompleted(e.getProjectId(), e.getLeadId(), e.getManeuverId()));
         }
     }
 }
