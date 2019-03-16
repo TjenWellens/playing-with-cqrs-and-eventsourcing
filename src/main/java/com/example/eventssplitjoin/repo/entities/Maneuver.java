@@ -1,4 +1,4 @@
-package com.example.eventssplitjoin.domain;
+package com.example.eventssplitjoin.repo.entities;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

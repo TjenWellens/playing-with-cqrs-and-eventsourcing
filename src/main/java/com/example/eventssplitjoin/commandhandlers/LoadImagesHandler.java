@@ -1,7 +1,7 @@
 package com.example.eventssplitjoin.commandhandlers;
 
 import com.example.eventssplitjoin.commands.LoadImages;
-import com.example.eventssplitjoin.domain.Maneuver;
+import com.example.eventssplitjoin.repo.entities.Maneuver;
 import com.example.eventssplitjoin.events.IncompleteImageDiscovered;
 import com.example.eventssplitjoin.events.IncompleteLeadDiscovered;
 import com.example.eventssplitjoin.events.IncompleteManeuverDiscovered;

@@ -1,6 +1,6 @@
 package com.example.eventssplitjoin.repo;
 
-import com.example.eventssplitjoin.domain.Maneuver;
+import com.example.eventssplitjoin.repo.entities.Maneuver;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
