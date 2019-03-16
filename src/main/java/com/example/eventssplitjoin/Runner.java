@@ -1,10 +1,10 @@
 package com.example.eventssplitjoin;
 
+import com.example.eventssplitjoin.bus.CommandBus;
 import com.example.eventssplitjoin.commands.LoadImages;
 import com.example.eventssplitjoin.domain.ImageType;
-import com.example.eventssplitjoin.events.Event;
 import com.example.eventssplitjoin.bus.EventBus;
-import com.google.common.eventbus.Subscribe;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,17 +12,15 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 @Component
+@RequiredArgsConstructor
 public class Runner implements CommandLineRunner {
-    private final EventBus eventBus;
-
-    public Runner(EventBus eventBus) {
-        this.eventBus = eventBus;
-    }
+    private final CommandBus bus;
 
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Runner.run");
-        eventBus.post(new LoadImages("project-1", new HashSet<>(Arrays.asList(
+        bus.post(
+                new LoadImages("project-1", new HashSet<>(Arrays.asList(
                 ImageType.PANORAMIX,
                 ImageType.HEATMAP
         ))));
