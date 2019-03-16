@@ -3,7 +3,7 @@ package com.example.eventssplitjoin.handlers;
 import com.example.eventssplitjoin.events.IncompleteProjectDiscovered;
 import com.example.eventssplitjoin.events.LeadCompleted;
 import com.example.eventssplitjoin.events.ProjectCompleted;
-import com.google.common.eventbus.EventBus;
+import com.example.eventssplitjoin.bus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

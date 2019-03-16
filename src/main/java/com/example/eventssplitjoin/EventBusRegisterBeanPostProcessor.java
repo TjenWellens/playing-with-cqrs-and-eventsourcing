@@ -1,6 +1,6 @@
 package com.example.eventssplitjoin;
 
-import com.google.common.eventbus.EventBus;
+import com.example.eventssplitjoin.bus.EventBus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;

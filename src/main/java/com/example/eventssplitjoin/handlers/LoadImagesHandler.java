@@ -7,7 +7,7 @@ import com.example.eventssplitjoin.events.IncompleteLeadDiscovered;
 import com.example.eventssplitjoin.events.IncompleteManeuverDiscovered;
 import com.example.eventssplitjoin.events.IncompleteProjectDiscovered;
 import com.example.eventssplitjoin.repo.ManeuverRepo;
-import com.google.common.eventbus.EventBus;
+import com.example.eventssplitjoin.bus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

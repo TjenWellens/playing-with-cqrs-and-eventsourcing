@@ -3,7 +3,7 @@ package com.example.eventssplitjoin;
 import com.example.eventssplitjoin.commands.LoadImages;
 import com.example.eventssplitjoin.domain.ImageType;
 import com.example.eventssplitjoin.events.Event;
-import com.google.common.eventbus.EventBus;
+import com.example.eventssplitjoin.bus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
