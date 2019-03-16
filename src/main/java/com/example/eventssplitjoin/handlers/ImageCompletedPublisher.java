@@ -22,7 +22,7 @@ class ImageCompletedPublisher {
     private void fetchImages() {
         // todo: fetch image, store image, store url
         try {
-            Thread.sleep((long) (Math.random() * 5000));
+            Thread.sleep((5000));
         } catch (InterruptedException e1) {
         }
     }
