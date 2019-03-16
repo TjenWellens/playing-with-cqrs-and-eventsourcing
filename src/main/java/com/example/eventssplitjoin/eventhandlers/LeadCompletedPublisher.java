@@ -1,4 +1,4 @@
-package com.example.eventssplitjoin.handlers;
+package com.example.eventssplitjoin.eventhandlers;
 
 import com.example.eventssplitjoin.events.IncompleteLeadDiscovered;
 import com.example.eventssplitjoin.events.LeadCompleted;

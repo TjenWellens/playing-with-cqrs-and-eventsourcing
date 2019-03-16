@@ -1,4 +1,4 @@
-package com.example.eventssplitjoin.handlers;
+package com.example.eventssplitjoin.commandhandlers;
 
 import com.example.eventssplitjoin.commands.LoadImages;
 import com.example.eventssplitjoin.domain.Maneuver;
