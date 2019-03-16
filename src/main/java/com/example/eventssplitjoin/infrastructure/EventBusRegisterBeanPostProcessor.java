@@ -1,4 +1,4 @@
-package com.example.eventssplitjoin;
+package com.example.eventssplitjoin.infrastructure;
 
 import com.example.eventssplitjoin.bus.EventBus;
 import lombok.RequiredArgsConstructor;
