@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class EventBusRegisterBeanPostProcessor implements BeanPostProcessor {
-    private final EventBus eventBus;
+    private final EventBus bus;
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        this.eventBus.register(bean);
+        this.bus.register(bean);
         return bean;
     }
 }
